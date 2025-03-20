@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter UI</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .counter-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            min-width: 220px;
+        }
+        h2 {
+            margin: 0 0 15px;
+            font-size: 22px;
+        }
+        .step-size {
+            margin-bottom: 15px;
+        }
+        input {
+            width: 40px;
+            text-align: center;
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+        .decrement {
+            background-color: #007bff;
+            color: white;
+        }
+        .increment {
+            background-color: #d3d3d3;
+        }
+        .reset {
+            background-color: #888;
+            color: white;
+            margin-top: 10px;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="counter-box">
+    <h2>Count <span id="count">10</span></h2>
+    
+    <div class="step-size">
+        <label for="step">Step Size:</label>
+        <input type="number" id="step" value="1" min="1">
+    </div>
+
+    <button class="decrement" onclick="decrement()">Decrement</button>
+    <button class="increment" onclick="increment()">Increment</button>
+    <br>
+    <button class="reset" onclick="resetCount()">Reset</button>
+</div>
+
+<script>
+    let count = 10;
+    const minCount = 0; // Prevents negative numbers
+
+    function updateDisplay() {
+        document.getElementById("count").innerText = count;
+    }
+
+    function getStepSize() {
+        return Math.max(1, parseInt(document.getElementById("step").value) || 1);
+    }
+
+    function increment() {
+        count += getStepSize();
+        updateDisplay();
+    }
+
+    function decrement() {
+        count = Math.max(minCount, count - getStepSize());
+        updateDisplay();
+    }
+
+    function resetCount() {
+        count = 10;
+        document.getElementById("step").value = 1;
+        updateDisplay();
+    }
+
+    updateDisplay();
+</script>
+
+</body>
+</html>
